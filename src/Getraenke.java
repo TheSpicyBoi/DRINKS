@@ -2,12 +2,14 @@ public class Getraenke {
     private String name;
     private int flaschenProKasten;
     private int getSollLagerbestand;
+    private String attribut;
 
     // Konstruktor
-    public Getraenke(String name, int flaschenProKasten, int LagerbestandInKaesten) {
+    public Getraenke(String name, int flaschenProKasten, int SollLagerbestandInKaesten,String attribut) {
         this.name = name;
         this.flaschenProKasten = flaschenProKasten;
-        this.getSollLagerbestand = LagerbestandInKaesten;
+        this.getSollLagerbestand = SollLagerbestandInKaesten;
+        this.attribut = attribut;
     }
 
     // Getter und Setter für "name"

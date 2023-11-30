@@ -33,7 +33,7 @@ public class Lagerbestand {
     // Berechnung der Anzahl der Kästen basierend auf den Einzelflaschen und Flaschen pro Kasten
     public void updateLagerstand() {
         int flaschenProKasten = getraenk.getFlaschenProKasten();
-        anzahlKaesten = anzahlEinzelflaschen / flaschenProKasten;
+        int restflaschen = anzahlEinzelflaschen % flaschenProKasten;
+        anzahlKaesten = (anzahlEinzelflaschen-restflaschen)/flaschenProKasten;
     }
-
 }
