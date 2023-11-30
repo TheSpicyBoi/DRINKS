@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="636bb6f7-cccf-4b61-ba7e-244901058025" name="Changes" comment="Klasse Getraenke erstellt mit attributen&#10;Klasse Standort erstellt mit attributen und skizze der funktionen&#10;Klasse Zentrallager erstellt mit attributen und skizze der funktionen&#10;Klasse Lagerbestand erstellt mit attribguten und skizze der funktionen">
+    <list default="true" id="636bb6f7-cccf-4b61-ba7e-244901058025" name="Changes" comment="Main klasse erstellt die zentrallager initialisiert und mit sachen auffüllt, standorte erstellt und auffüllt, sachen verkauft und dann lagerbestand checkt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Zentrallager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Zentrallager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +81,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700818502129</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Main klasse erstellt die zentrallager initialisiert und mit sachen auffüllt, standorte erstellt und auffüllt, sachen verkauft und dann lagerbestand checkt">
+      <option name="closed" value="true" />
+      <created>1701100210260</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1701100210260</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -99,6 +105,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Klasse Getraenke erstellt mit attributen&#10;Klasse Standort erstellt mit attributen und skizze der funktionen&#10;Klasse Zentrallager erstellt mit attributen und skizze der funktionen&#10;Klasse Lagerbestand erstellt mit attribguten und skizze der funktionen" />
-    <option name="LAST_COMMIT_MESSAGE" value="Klasse Getraenke erstellt mit attributen&#10;Klasse Standort erstellt mit attributen und skizze der funktionen&#10;Klasse Zentrallager erstellt mit attributen und skizze der funktionen&#10;Klasse Lagerbestand erstellt mit attribguten und skizze der funktionen" />
+    <MESSAGE value="Main klasse erstellt die zentrallager initialisiert und mit sachen auffüllt, standorte erstellt und auffüllt, sachen verkauft und dann lagerbestand checkt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Main klasse erstellt die zentrallager initialisiert und mit sachen auffüllt, standorte erstellt und auffüllt, sachen verkauft und dann lagerbestand checkt" />
   </component>
 </project>
