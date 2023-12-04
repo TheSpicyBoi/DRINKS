@@ -8,6 +8,7 @@ public class Main {
         int verschickteFlaschen = anzahl * flaschenProKasten;
         lagerbestand.setAnzahlEinzelflaschen(lagerbestand.getAnzahlEinzelflaschen()-verschickteFlaschen);
         lagerbestand.updateLagerstand();
+        //nimmt erstmal an das es bisher keinen Lagerbestand gibt und sucht dann erst ob es den doch gibt
         boolean found = false;
         for (Lagerbestand zielLager: zielort.lagerbestand){
             if(zielLager.getGetraenk().getName().equals(getraenk.getName())&& anzahl <zielort.getLagerkapazitaetInKaesten()){
@@ -17,43 +18,20 @@ public class Main {
                 break;
             }
         }
+        //Falls es keinen Lagerbestand gibt erstellt es einen neuen
         if (!found){
             Lagerbestand neuerLagerbestand = new Lagerbestand(getraenk, verschickteFlaschen);
             zielort.lagerbestand.add(neuerLagerbestand);
         }
     }
     public static void main(String[] args) {
-        // Erstellung von Getränken
         List<Standort> standorte = new ArrayList<>();
-        // Erstellung von Standorten
         Standort standort1 = new Standort("Lager1", 100);
         Standort standort2 = new Standort("Lager2", 150);
         standorte.add(standort1);
         standorte.add(standort2);
-
-        // Erstellung des Zentrallagers
         Zentrallager zentrallager = new Zentrallager("Zentrale");
         zentrallager.initialeLagerbestaende();
-
-        // Verschicken von Getränken vom Zentrallager zu Standorten
-        //System.out.println("versucht sachen zu verschicken");
-        //zentrallager.verschicke(standort1, "cola", 5);
-        //zentrallager.verschicke(standort2, "limonade", 3);
-        //System.out.println("hat getränke verschickt");
-
-        // Überprüfen der Lagerbestände in den Standorten
-        //standort1.lagerbestandChecken();
-        //standort2.lagerbestandChecken();
-
-        // Verkauf von Getränken von Standorten
-        //standort1.sachenVerkaufen("cola",15);
-
-        // Überprüfen der aktualisierten Lagerbestände nach dem Verkauf
-        //System.out.println("\nLagerbestände in Standort 1 nach Verkauf:");
-        //standort1.lagerbestandChecken();
-
-        // Weitere Aktionen im Zentrallager möglich, z.B. Zugriff auf andere Funktionen
-        // zentralLager.weitereFunktionImZentralLager();
         Scanner scanner = new Scanner(System.in);
         int option = 0;
 
@@ -76,22 +54,20 @@ public class Main {
                 int anzahl;
                 switch (option) {
                     case 1:
-                        // Verkaufen
                         System.out.println("Verkaufsaktion:");
-                        // Was soll verkauft werden
-                        System.out.println("wo soll verkauft werden");
+                        System.out.println("Wo soll verkauft werden");
                         for (Standort standort:standorte){
                             System.out.println(standort.getStandortName());
                         }
                         standortname = scanner.next();
                         for (Standort standort:standorte){
                             if (standort.getStandortName().equals(standortname));
-                            System.out.println("was soll verkauft werden");
+                            System.out.println("Welches Getränk soll verkauft werden?");
                             standort.lagerbestandChecken();
                             String verkauftesache = scanner.next();
                             for (Lagerbestand lager :standort.getLagerbestandListe()){
                                 if (lager.getGetraenk().getName().equals(verkauftesache)){
-                                    System.out.println("Wie viele willst du verkaufen?");
+                                    System.out.println("Wie viele Flaschen sollen verkauft werden?");
                                     anzahl = scanner.nextInt();
                                     standort.sachenVerkaufen(verkauftesache,anzahl);
                                 }else break;
@@ -99,28 +75,26 @@ public class Main {
                         }
                         break;
                     case 2:
-                        // Verschicken
                         System.out.println("Versandaktion:");
-                        //was soll verschickt werden
                         zentrallager.zentrallagerbestandChecken();
-                        System.out.println("was soll verschickt werden?");
+                        System.out.println("Welches Getränk soll verschickt werden?");
                         sortenname = scanner.next();
                         for (Lagerbestand lager: zentrallager.getZentrallagerbestand()){
                             if (lager.getGetraenk().getName().equals(sortenname)){
-                                System.out.println("wohin soll es verschickt werden");
+                                System.out.println("Wohin soll es verschickt werden");
                                 for (Standort standort:standorte){
                                     System.out.println(standort.getStandortName());
                                 }
                                 standortname = scanner.next();
                                 for(Standort standort:standorte){
                                         if (standort.getStandortName().equals(standortname)){
-                                     System.out.println("Wie viele kästen sollen verschickt werden?");
-                                     System.out.println(lager.getAnzahlKaesten()+" kästen sind hier gelagert2");
-                                     System.out.println(standort.getLagerkapazitaetInKaesten() +" kästen können gelagert werden");
+                                     System.out.println("Wie viele Kästen sollen verschickt werden?");
+                                     System.out.println(lager.getAnzahlKaesten()+" Kästen sind hier gelagert2");
+                                     System.out.println(standort.getLagerkapazitaetInKaesten() +" Kästen können gelagert werden");
                                      anzahl = scanner.nextInt();
                                      if(anzahl<standort.getLagerkapazitaetInKaesten()){
                                          zentrallager.verschicke(standort,sortenname,anzahl);
-                                     } else System.out.println("so viele sachen können nicht verschickt werden");
+                                     } else System.out.println("so viele Kästen können nicht verschickt werden");
                                     }
                                 }
                                 break;
@@ -129,7 +103,6 @@ public class Main {
                         }
                         break;
                     case 3:
-                        // Lagerbestände checken
                         System.out.println("Lagerbestände:");
                         for (Standort standort:standorte){
                             System.out.println(standort.getStandortName());
@@ -153,19 +126,19 @@ public class Main {
                         }
                         break;
                     case 5:
-                        System.out.println("von wo soll verschickt werden");
+                        System.out.println("Von wo soll verschickt werden");
                         for (Standort standort:standorte){
                             System.out.println(standort.getStandortName());
                         }
                         urpsrungsort =scanner.next();
                         for (Standort ursprungsort:standorte){
                             if(ursprungsort.getStandortName().equals(urpsrungsort)){
-                                System.out.println("was soll verschickt werden");
+                                System.out.println("Welches Getränk soll verschickt werden?");
                                 ursprungsort.lagerbestandChecken();
                                 sortenname =scanner.next();
                                 for (Lagerbestand lager:ursprungsort.getLagerbestandListe()){
                                     if(lager.getGetraenk().getName().equals(sortenname)){
-                                        System.out.println("wohin soll es verschickt werden?");
+                                        System.out.println("Wohin soll es verschickt werden?");
                                         for (Standort zielstandort:standorte){
                                             if(zielstandort.getStandortName().equals(urpsrungsort)){
                                                 continue;
@@ -174,8 +147,8 @@ public class Main {
                                         zielort = scanner.next();
                                         for (Standort zielstandort:standorte){
                                             if (zielstandort.getStandortName().equals(zielort)){
-                                                System.out.println("wie viel soll verschickt werden?");
-                                                System.out.println(lager.getAnzahlKaesten()+" können verschickt werden");
+                                                System.out.println("Wie viele Kästen sollen verschickt werden?");
+                                                System.out.println(lager.getAnzahlKaesten()+" Kästen können verschickt werden");
                                                 anzahl =scanner.nextInt();
                                                 if (anzahl< lager.getAnzahlKaesten()){
                                                     verschiebe(ursprungsort,zielstandort,lager,anzahl);
@@ -203,3 +176,4 @@ public class Main {
         }
     }
 }
+
