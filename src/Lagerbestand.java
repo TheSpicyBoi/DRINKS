@@ -9,11 +9,11 @@ public class Lagerbestand {
     /**
      * Konstruktor für die Klasse Lagerbestand.
      * @param getraenk Das Getränk, das im Lagerbestand enthalten ist.
-     * @param anzahlEinzelflaschen Die Anzahl der Einzelflaschen des Getränks im Lager.
+     * @param anzahlKaesten Die Anzahl der Kaesten des Getränks im Lager.
      */
-    public Lagerbestand(Getraenke getraenk, int anzahlEinzelflaschen) {
+    public Lagerbestand(Getraenke getraenk, int anzahlKaesten) {
         this.getraenk = getraenk;
-        this.anzahlEinzelflaschen = anzahlEinzelflaschen;
+        this.anzahlEinzelflaschen = anzahlKaesten*getraenk.getFlaschenProKasten();
         updateLagerstand();
     }
 

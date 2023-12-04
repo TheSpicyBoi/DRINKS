@@ -25,22 +25,25 @@ public class Main {
         }
     }
     private static void initialeLagerbestaende(List<Getraenke> sortiment, Zentrallager zentrallager, List<Standort> standorte) {
-        Getraenke wasser = new Getraenke("Wasser", 20, 30, "glas",200,100,50);
-        Getraenke cola = new Getraenke("Cola", 10, 30, "plastik",400,200,100);
-        Getraenke limo = new Getraenke("Limo", 20, 30, " fruchtgehalt",200,200,50);
-        Getraenke bier = new Getraenke("Bier", 20, 30, "5% Alkoholgehalt",400,200,150);
-        Getraenke saft = new Getraenke("Saft", 12, 25, "Leicht verstrahlt",400,200,150);
+        Getraenke mineralwasserstill = new Getraenke("Mineralwasser, still", 6, 200, "glas",200,100,50);
+        Getraenke mineralwasserkohlensäure = new Getraenke("Mineralwasser, mit Kohlensäure", 12, 400, "glas",400,200,100);
+        Getraenke apfelsaft = new Getraenke("Apfelsaft", 6, 200, "glas",200,100,50);
+        Getraenke orangensaft = new Getraenke("Orangensaft", 6, 400, "glas",400,200,200);
+        Getraenke limo = new Getraenke("Limonade", 12, 300, " fruchtgehalt",300,150,100);
+        Getraenke bier = new Getraenke("Bier", 24, 200, "5% Alkoholgehalt",200,150,150);
         for (Standort standort:standorte){
-            Lagerbestand wasserLager = new Lagerbestand(wasser, 0);
-            Lagerbestand colaLager = new Lagerbestand(cola, 0);
-            Lagerbestand limoLager = new Lagerbestand(limo, 0);
+            Lagerbestand mineralwasserstillLager = new Lagerbestand(mineralwasserstill, 0);
+            Lagerbestand mineralwasserkohlensäureLager = new Lagerbestand(mineralwasserkohlensäure, 0);
+            Lagerbestand apfelsaftLager = new Lagerbestand(apfelsaft, 0);
+            Lagerbestand orangensaftLager = new Lagerbestand(orangensaft,0 );
+            Lagerbestand limoLager = new Lagerbestand(limo,0 );
             Lagerbestand bierLager = new Lagerbestand(bier,0 );
-            Lagerbestand saftLager = new Lagerbestand(saft,0 );
-            standort.lagerbestand.add(wasserLager);
-            standort.lagerbestand.add(colaLager);
+            standort.lagerbestand.add(mineralwasserstillLager);
+            standort.lagerbestand.add(mineralwasserkohlensäureLager);
+            standort.lagerbestand.add(apfelsaftLager);
+            standort.lagerbestand.add(orangensaftLager);
             standort.lagerbestand.add(limoLager);
             standort.lagerbestand.add(bierLager);
-            standort.lagerbestand.add(saftLager);
         }
         zentrallager.nachbestellen();
 
@@ -113,6 +116,7 @@ public class Main {
                             if (lager.getGetraenk().getName().equals(sortenname)){
                                 System.out.println("Wohin soll es verschickt werden");
                                 for (Standort standort :standorte){
+                                    if(standort.getStandortName() != "Zentrale")
                                     System.out.println(standort.getStandortName());
                                 }
                                 standortname = scanner.next();

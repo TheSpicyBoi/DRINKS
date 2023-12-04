@@ -33,9 +33,9 @@ public class Getraenke {
     }
     public int getstandortmax(Standort standort){
         switch (standort.name){
-            case "standort1":return standort1max;
-            case "standort2":return standort2max;
-            case "zentrallager":return zentrallagermax;
+            case "Lager1":return standort1max;
+            case "Lager2":return standort2max;
+            case "Zentrale":return zentrallagermax;
             default:System.out.println("kein gültiger standort");
                     return 0;
         }

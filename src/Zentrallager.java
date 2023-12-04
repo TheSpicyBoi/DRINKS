@@ -21,7 +21,7 @@ public class Zentrallager extends Standort{
             if (lager.getGetraenk().getName().equals(getraenksorteName)) {
                 if (lager.getAnzahlKaesten() > anzahlKaesten){
                     gesuchtesGetraenk = lager.getGetraenk();
-                } else System.out.println("so viele kästen gibt es nicht!");
+                } else System.out.println("so viele kästen gibt es nicht, bitte zuerst Nachbestellen!!!");
 
                 break;
             }
@@ -33,7 +33,7 @@ public class Zentrallager extends Standort{
                 if (standortlager.getGetraenk().getName().equals(neuerLagerbestand.getGetraenk().getName())){
                     found =true;
                     standortlager.setAnzahlEinzelflaschen(anzahlKaesten*standortlager.getGetraenk().getFlaschenProKasten());
-                } else standort.lagerbestand.add(neuerLagerbestand);
+                }
             }
 
             for (Lagerbestand lager : lagerbestand) {
@@ -43,9 +43,7 @@ public class Zentrallager extends Standort{
                     break;
                 }
             }
-        } else {
-            System.out.println("Das gesuchte Getränk ist nicht im Zentrallager verfügbar.");
-        }
+        } else System.out.println("Das gesuchte Getränk ist nicht im Zentrallager verfügbar.");
     }
 
     /**
@@ -57,8 +55,8 @@ public class Zentrallager extends Standort{
         Getraenke gesuchtesGetraenk = null;
 
         for (Lagerbestand lager : standort.lagerbestand) {
-            if (lager.getAnzahlEinzelflaschen()<lager.getGetraenk().getSollLagerbestand()) {
-                int anzahl = lager.getGetraenk().getSollLagerbestand()- lager.getAnzahlEinzelflaschen();
+            if (lager.getAnzahlKaesten()<lager.getGetraenk().getstandortmax(standort)) {
+                int anzahl = lager.getGetraenk().getstandortmax(standort)- lager.getAnzahlKaesten();
                 verschicke(standort,lager.getGetraenk().getName(),anzahl);
             }
         }
@@ -66,7 +64,7 @@ public class Zentrallager extends Standort{
 
     public void nachbestellen(){
         for (Lagerbestand lagerbestand: this.lagerbestand){
-            lagerbestand.setAnzahlEinzelflaschen(lagerbestand.getGetraenk().getstandortmax(this));
+            lagerbestand.setAnzahlEinzelflaschen(lagerbestand.getGetraenk().getstandortmax(this)*lagerbestand.getGetraenk().getFlaschenProKasten());
             lagerbestand.updateLagerstand();
         }
     }
