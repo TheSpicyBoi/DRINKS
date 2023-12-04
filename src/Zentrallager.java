@@ -51,18 +51,23 @@ public class Zentrallager extends Standort{
     /**
      * Schickt Getränke an einen bestimmten Standort nach, wenn der Bestand dort zu niedrig ist.
      *
-     * @param getraenksorte Der Name der Getränksorte, die nachgeschickt werden sollen.
-     * @param verkaufsStandorte      Der Zielstandort, an den die Getränke nachgeschickt werden.
-     * @param anzahlKaesten Die Anzahl der nachzuschickenden Kästen.
+     * @param standort      Der Zielstandort, an den die Getränke nachgeschickt werden.
      */
-    public void nachschicken(String getraenksorte, VerkaufsStandorte verkaufsStandorte, int anzahlKaesten) {
+    public void nachschicken(Standort standort) {
         Getraenke gesuchtesGetraenk = null;
 
-        for (Lagerbestand lager : lagerbestand) {
-            if (lager.getGetraenk().getName().equals(getraenksorte)) {
-                gesuchtesGetraenk = lager.getGetraenk();
-                break;
+        for (Lagerbestand lager : standort.lagerbestand) {
+            if (lager.getAnzahlEinzelflaschen()<lager.getGetraenk().getSollLagerbestand()) {
+                int anzahl = lager.getGetraenk().getSollLagerbestand()- lager.getAnzahlEinzelflaschen();
+                verschicke(standort,lager.getGetraenk().getName(),anzahl);
             }
+        }
+    }
+
+    public void nachbestellen(){
+        for (Lagerbestand lagerbestand: this.lagerbestand){
+            lagerbestand.setAnzahlEinzelflaschen(lagerbestand.getGetraenk().getstandortmax(this));
+            lagerbestand.updateLagerstand();
         }
     }
 }

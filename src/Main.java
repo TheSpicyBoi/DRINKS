@@ -29,30 +29,20 @@ public class Main {
         Getraenke cola = new Getraenke("Cola", 10, 30, "plastik",400,200,100);
         Getraenke limo = new Getraenke("Limo", 20, 30, " fruchtgehalt",200,200,50);
         Getraenke bier = new Getraenke("Bier", 20, 30, "5% Alkoholgehalt",400,200,150);
-        Getraenke saft = new Getraenke("Saft", 12, 25, "",400,200,150);
-        Lagerbestand wasserLager = new Lagerbestand(wasser, wasser.getZentrallagermax());
-        Lagerbestand colaLager = new Lagerbestand(cola, cola.getZentrallagermax());
-        Lagerbestand limoLager = new Lagerbestand(limo, limo.getZentrallagermax());
-        Lagerbestand bierLager = new Lagerbestand(bier, bier.getZentrallagermax());
-        Lagerbestand saftLager = new Lagerbestand(saft, saft.getZentrallagermax());
-
-        zentrallager.lagerbestand.add(wasserLager);
-        zentrallager.lagerbestand.add(colaLager);
-        zentrallager.lagerbestand.add(limoLager);
-        zentrallager.lagerbestand.add(bierLager);
-        zentrallager.lagerbestand.add(saftLager);
+        Getraenke saft = new Getraenke("Saft", 12, 25, "Leicht verstrahlt",400,200,150);
         for (Standort standort:standorte){
-            wasserLager = new Lagerbestand(wasser, 0);
-            colaLager = new Lagerbestand(cola, 0);
-            limoLager = new Lagerbestand(limo, 0);
-            bierLager = new Lagerbestand(bier,0 );
-            saftLager = new Lagerbestand(saft,0 );
+            Lagerbestand wasserLager = new Lagerbestand(wasser, 0);
+            Lagerbestand colaLager = new Lagerbestand(cola, 0);
+            Lagerbestand limoLager = new Lagerbestand(limo, 0);
+            Lagerbestand bierLager = new Lagerbestand(bier,0 );
+            Lagerbestand saftLager = new Lagerbestand(saft,0 );
             standort.lagerbestand.add(wasserLager);
             standort.lagerbestand.add(colaLager);
             standort.lagerbestand.add(limoLager);
             standort.lagerbestand.add(bierLager);
             standort.lagerbestand.add(saftLager);
         }
+        zentrallager.nachbestellen();
 
     }
 
@@ -160,7 +150,7 @@ public class Main {
                         standortname = scanner.next();
                         for (VerkaufsStandorte standort :verkaufsStandorte){
                             if (standort.getStandortName().equals(standortname)){
-                                standort.
+                                zentrallager.nachschicken(standort);
                             }else break;
                         }
                         break;
