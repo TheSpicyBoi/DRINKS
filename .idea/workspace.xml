@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="636bb6f7-cccf-4b61-ba7e-244901058025" name="Changes" comment="Main klasse erstellt die zentrallager initialisiert und mit sachen auffüllt, standorte erstellt und auffüllt, sachen verkauft und dann lagerbestand checkt">
+    <list default="true" id="636bb6f7-cccf-4b61-ba7e-244901058025" name="Changes" comment="Code fertig geschrieben und fast alles gedoct">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/VerkaufsStandorte.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Getraenke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Getraenke.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lagerbestand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lagerbestand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Standort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Standort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Zentrallager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Zentrallager.java" afterDir="false" />
@@ -25,6 +26,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -38,14 +44,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;D:/programming shit/Drink/src/Main.java&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "Spicy",
+    "onboarding.tips.debug.path": "D:/programming shit/Drink/src/Main.java"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="DRINKS" />
@@ -110,7 +117,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701352768338</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Code fertig geschrieben und fast alles gedoct">
+      <option name="closed" value="true" />
+      <created>1701683917222</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701683917222</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -127,6 +142,22 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Klasse Getraenke erstellt mit attributen&#10;Klasse Standort erstellt mit attributen und skizze der funktionen&#10;Klasse Zentrallager erstellt mit attributen und skizze der funktionen&#10;Klasse Lagerbestand erstellt mit attribguten und skizze der funktionen" />
     <MESSAGE value="Main klasse erstellt die zentrallager initialisiert und mit sachen auffüllt, standorte erstellt und auffüllt, sachen verkauft und dann lagerbestand checkt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Main klasse erstellt die zentrallager initialisiert und mit sachen auffüllt, standorte erstellt und auffüllt, sachen verkauft und dann lagerbestand checkt" />
+    <MESSAGE value="Code fertig geschrieben und fast alles gedoct" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code fertig geschrieben und fast alles gedoct" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.util.ConcurrentModificationException" package="java.util" />
+          <option name="timeStamp" value="18" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>168</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

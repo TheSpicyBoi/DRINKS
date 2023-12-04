@@ -1,22 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Die Klasse Standort repräsentiert einen Lagerstandort für Getränke.
- */
 public class Standort {
     public String name;
-    private int lagerkapazitaetInKaesten;
     public List<Lagerbestand> lagerbestand;
-
     /**
      * Konstruktor für die Klasse Standort.
      * @param name Der Name des Lagerstandorts.
-     * @param lagerkapazitaetInKaesten Die Lagerkapazität in Kästen.
      */
-    public Standort(String name, int lagerkapazitaetInKaesten) {
+    public Standort(String name) {
         this.name = name;
-        this.lagerkapazitaetInKaesten = lagerkapazitaetInKaesten;
         this.lagerbestand = new ArrayList<>();
     }
 
@@ -28,6 +21,7 @@ public class Standort {
         return name;
     }
 
+
     /**
      * Setzt den Namen des Lagerstandorts.
      * @param name Der zu setzende Name.
@@ -36,21 +30,6 @@ public class Standort {
         this.name = name;
     }
 
-    /**
-     * Gibt die Lagerkapazität in Kästen zurück.
-     * @return Die Lagerkapazität in Kästen.
-     */
-    public int getLagerkapazitaetInKaesten() {
-        return lagerkapazitaetInKaesten;
-    }
-
-    /**
-     * Setzt die Lagerkapazität in Kästen.
-     * @param lagerkapazitaetInKaesten Die zu setzende Lagerkapazität in Kästen.
-     */
-    public void setLagerkapazitaetInKaesten(int lagerkapazitaetInKaesten) {
-        this.lagerkapazitaetInKaesten = lagerkapazitaetInKaesten;
-    }
 
     /**
      * Gibt die Liste des Lagerbestands zurück.
@@ -95,6 +74,7 @@ public class Standort {
         }
     }
 
+
     /**
      * Überprüft den Lagerbestand und gibt Informationen über die Bestände aus.
      */
@@ -106,22 +86,4 @@ public class Standort {
                     ", Anzahl Kästen: " + lagerbestand.getAnzahlKaesten()+
                     ", mit dem Attribut: " + lagerbestand.getGetraenk().getAttribut());
         }    }
-
-    /**
-     * Bestellt Getränke beim Zentrallager, wenn der Bestand unter den Sollwert fällt.
-     * @param zentrallager Das Zentrallager, bei dem die Bestellung aufgegeben wird.
-     */
-    public void nachbestellen(Zentrallager zentrallager) {
-        for (Lagerbestand lager : lagerbestand) {
-            Getraenke getraenk = lager.getGetraenk();
-            int aktuellerBestand = lager.getAnzahlEinzelflaschen();
-
-            if (aktuellerBestand < getraenk.getSollLagerbestand()) {
-                int zuBestellen = getraenk.getSollLagerbestand() - aktuellerBestand;
-                int anzahlKaestenZuBestellen = (zuBestellen + getraenk.getFlaschenProKasten() - 1) / getraenk.getFlaschenProKasten();
-
-                zentrallager.nachschicken(getraenk.getName(), this, anzahlKaestenZuBestellen);
-            }
-        }
-    }
 }
