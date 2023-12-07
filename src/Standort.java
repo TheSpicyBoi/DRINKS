@@ -17,7 +17,7 @@ public class Standort {
      * Gibt den Namen des Lagerstandorts zurück.
      * @return Der Name des Lagerstandorts.
      */
-    public String getStandortName() {
+    public String getName() {
         return name;
     }
 
@@ -48,42 +48,84 @@ public class Standort {
     }
 
     /**
-     * Verkauft Einzelflaschen eines bestimmten Getränks aus dem Lagerbestand.
-     * @param getraenksorteName Der Name der Getränksorte, die verkauft werden soll.
-     * @param verkauftEinzelflaschen Die Anzahl der zu verkaufenden Einzelflaschen.
+     * Vewrschiebt Getränke an einen bestimmten Standort.
+     *
+     * @param zielStandort          Der Zielstandort, an den die Getränke verschickt werden.
+     * @param getraenksorteName Der Name der Getränksorte, die verschickt werden sollen.
+     * @param anzahlKaesten     Die Anzahl der zu verschickenden Kästen.
      */
-    public void sachenVerkaufen(String getraenksorteName, int verkauftEinzelflaschen) {
-        boolean gefunden = false;
+    public void verschiebe(Standort zielStandort, String getraenksorteName, int anzahlKaesten) {
+
+        if(this == zielStandort){
+            System.out.println("Start- und Zielstandort sind identisch!");
+            return;
+        }
+
+        Lagerbestand startLagerbestand = null;
         for (Lagerbestand lager : lagerbestand) {
             if (lager.getGetraenk().getName().equals(getraenksorteName)) {
-                int aktuelleEinzelflaschen = lager.getAnzahlEinzelflaschen();
-                if (verkauftEinzelflaschen <= aktuelleEinzelflaschen) {
-                    lager.setAnzahlEinzelflaschen(aktuelleEinzelflaschen - verkauftEinzelflaschen);
-                    gefunden = true;
-                    break;
-                } else {
-                    System.out.println("Nicht genügend Bestand für den Verkauf.");
-                    gefunden = true;
-                    break;
-                }
+                startLagerbestand = lager;
+            }
+        }
+        if(startLagerbestand == null){
+            System.out.println("Start Lagerbestand nicht gefunden");
+            return;
+        }
+
+
+        Lagerbestand zielLagerbestand = null;
+        for (Lagerbestand lager : zielStandort.getLagerbestandListe()) {
+            if (lager.getGetraenk().getName().equals(getraenksorteName)) {
+                zielLagerbestand = lager;
             }
         }
 
-        if (!gefunden) {
-            System.out.println("Das gesuchte Getränk ist nicht im Lager dieses Standorts verfügbar.");
+        if (zielLagerbestand == null) {
+            zielLagerbestand = new Lagerbestand(startLagerbestand.getGetraenk(),0);
+            zielStandort.getLagerbestandListe().add(zielLagerbestand);
         }
+        if(startLagerbestand.getAnzahlKaesten() < anzahlKaesten) {
+            System.out.println("Nicht genug Kästen vorhanden");
+            return;
+        }
+        if(zielLagerbestand.getGetraenk().getstandortmax(zielStandort) < anzahlKaesten+zielLagerbestand.getAnzahlKaesten()) {
+            System.out.println("Maximale Kapazität des Ziel Standortes überschritten");
+            return;
+        }
+
+        zielLagerbestand.setAnzahlEinzelflaschen((zielLagerbestand.getAnzahlKaesten() + anzahlKaesten)*zielLagerbestand.getGetraenk().getFlaschenProKasten());
+        startLagerbestand.setAnzahlEinzelflaschen((startLagerbestand.getAnzahlKaesten() - anzahlKaesten)*startLagerbestand.getGetraenk().getFlaschenProKasten());
+
+
+        /*if (gesuchtesGetraenk != null) {
+            Lagerbestand neuerLagerbestand = new Lagerbestand(gesuchtesGetraenk, anzahlKaesten * gesuchtesGetraenk.getFlaschenProKasten());
+            for(Lagerbestand standortlager : zielStandort.lagerbestand){
+                if (standortlager.getGetraenk().getName().equals(neuerLagerbestand.getGetraenk().getName())){
+                    found = true;
+                    standortlager.setAnzahlEinzelflaschen(anzahlKaesten*standortlager.getGetraenk().getFlaschenProKasten());
+                }
+            }
+
+            for (Lagerbestand lager : lagerbestand) {
+                if (lager.getGetraenk() == gesuchtesGetraenk) {
+                    lager.setAnzahlEinzelflaschen(lager.getAnzahlEinzelflaschen() + neuerLagerbestand.getAnzahlEinzelflaschen());
+                    lager.updateLagerstand();
+                    break;
+                }
+            }
+        } else System.out.println("Das gesuchte Getränk ist im Lager des Ziel Standortes nicht verfügbar.");*/
     }
 
 
     /**
      * Überprüft den Lagerbestand und gibt Informationen über die Bestände aus.
      */
-    public void lagerbestandChecken() {
+    public void lagerbestandAusgeben() {
         System.out.println("Lagerbestände für Standort " + name + ":");
         for (Lagerbestand lagerbestand : lagerbestand) {
             System.out.println("Getränk: " + lagerbestand.getGetraenk().getName() +
-                    ", Anzahl Einzelflaschen: " + lagerbestand.getAnzahlEinzelflaschen() +
-                    ", Anzahl Kästen: " + lagerbestand.getAnzahlKaesten()+
-                    ", mit dem Attribut: " + lagerbestand.getGetraenk().getAttribut());
+                    "; Anzahl Einzelflaschen: " + lagerbestand.getAnzahlEinzelflaschen() +
+                    "; Anzahl Kästen: " + lagerbestand.getAnzahlKaesten()+
+                    "; " + lagerbestand.getGetraenk().getAttributName() + ": "+lagerbestand.getGetraenk().getAttributWert());
         }    }
 }

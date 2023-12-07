@@ -1,11 +1,12 @@
 /**
  * Die Klasse Getraenke repräsentiert ein Getränk mit seinen Eigenschaften.
  */
-public class Getraenke {
+public class GetraenkeSorte {
     private String name;
     private int flaschenProKasten;
     private int sollLagerbestand;
-    private String attribut;
+    private String attributName;
+    private String attributWert;
 
     private int zentrallagermax;
 
@@ -22,11 +23,12 @@ public class Getraenke {
      * @param sollLagerbestandInKaesten Der Soll-Lagerbestand in Kästen.
      * @param attribut Das Attribut des Getränks (z. B. Material, Gehalt usw.).
      */
-    public Getraenke(String name, int flaschenProKasten, int sollLagerbestandInKaesten, String attribut, int zentrallagermax, int standort1max, int standort2max) {
+    public GetraenkeSorte(String name, int flaschenProKasten, int sollLagerbestandInKaesten, String attributName, String attributWert, int zentrallagermax, int standort1max, int standort2max) {
         this.name = name;
         this.flaschenProKasten = flaschenProKasten;
         this.sollLagerbestand = sollLagerbestandInKaesten;
-        this.attribut = attribut;
+        this.attributName = attributName;
+        this.attributWert = attributWert;
         this.zentrallagermax=zentrallagermax;
         this.standort1max=standort1max;
         this.standort2max=standort2max;
@@ -89,11 +91,27 @@ public class Getraenke {
     }
 
     /**
-     * Gibt das Attribut des Getränks zurück.
-     * @return Das Attribut des Getränks.
+     * Gibt den Attribut Namen des Getränks zurück.
+     * @return Den Attribut Namen des Getränks.
      */
-    public String getAttribut() {
-        return attribut;
+    public String getAttributName() {
+        return attributName;
+    }
+
+    /**
+     * Gibt den Attribut Wert des Getränks zurück.
+     * @return Den Attribut Wert des Getränks.
+     */
+    public String getAttributWert() {
+        return attributWert;
+    }
+
+    /**
+     * Setzt den Attribut Wert des Getränks.
+     * @param Der Attribut Wert des Getränks.
+     */
+    public void setAttributWert(String wert) {
+       this.attributWert = wert;
     }
 
     public void setZentrallagermax(int zentrallagermax){

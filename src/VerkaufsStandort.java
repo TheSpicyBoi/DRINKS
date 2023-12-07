@@ -1,11 +1,8 @@
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Die Klasse Standort repräsentiert einen Lagerstandort für Getränke.
  */
-public class VerkaufsStandorte extends Standort {
-    public VerkaufsStandorte(String name) {
+public class VerkaufsStandort extends Standort {
+    public VerkaufsStandort(String name) {
         super(name);
     }
     /**
@@ -42,14 +39,14 @@ public class VerkaufsStandorte extends Standort {
      */
     public void nachbestellen(Zentrallager zentrallager) {
         for (Lagerbestand lager : lagerbestand) {
-            Getraenke getraenk = lager.getGetraenk();
+            GetraenkeSorte getraenk = lager.getGetraenk();
             int aktuellerBestand = lager.getAnzahlEinzelflaschen();
 
             if (aktuellerBestand < getraenk.getSollLagerbestand()) {
                 int zuBestellen = getraenk.getSollLagerbestand() - aktuellerBestand;
                 int anzahlKaestenZuBestellen = (zuBestellen + getraenk.getFlaschenProKasten() - 1) / getraenk.getFlaschenProKasten();
 
-                zentrallager.verschicke(this, getraenk.getName(), anzahlKaestenZuBestellen);
+                zentrallager.verschiebe(this, getraenk.getName(), anzahlKaestenZuBestellen);
             }
         }
     }

@@ -6,15 +6,10 @@ public class Zentrallager extends Standort{
     public Zentrallager(String name) {
         super(name);
     }
-    /**
-     * Verschickt Getränke an einen bestimmten Standort.
-     *
-     * @param standort          Der Zielstandort, an den die Getränke verschickt werden.
-     * @param getraenksorteName Der Name der Getränksorte, die verschickt werden sollen.
-     * @param anzahlKaesten     Die Anzahl der zu verschickenden Kästen.
-     */
-    public void verschicke(Standort standort, String getraenksorteName, int anzahlKaesten) {
-        Getraenke gesuchtesGetraenk = null;
+
+
+    /*public void verschicke(Standort standort, String getraenksorteName, int anzahlKaesten) {
+        GetraenkeSorte gesuchtesGetraenk = null;
         boolean found = false;
 
         for (Lagerbestand lager : lagerbestand) {
@@ -31,7 +26,7 @@ public class Zentrallager extends Standort{
             Lagerbestand neuerLagerbestand = new Lagerbestand(gesuchtesGetraenk, anzahlKaesten * gesuchtesGetraenk.getFlaschenProKasten());
             for(Lagerbestand standortlager : standort.lagerbestand){
                 if (standortlager.getGetraenk().getName().equals(neuerLagerbestand.getGetraenk().getName())){
-                    found =true;
+                    found = true;
                     standortlager.setAnzahlEinzelflaschen(anzahlKaesten*standortlager.getGetraenk().getFlaschenProKasten());
                 }
             }
@@ -44,20 +39,19 @@ public class Zentrallager extends Standort{
                 }
             }
         } else System.out.println("Das gesuchte Getränk ist nicht im Zentrallager verfügbar.");
-    }
+    }*/
 
     /**
      * Schickt Getränke an einen bestimmten Standort nach, wenn der Bestand dort zu niedrig ist.
-     *
      * @param standort      Der Zielstandort, an den die Getränke nachgeschickt werden.
      */
     public void nachschicken(Standort standort) {
-        Getraenke gesuchtesGetraenk = null;
+        GetraenkeSorte gesuchtesGetraenk = null;
 
         for (Lagerbestand lager : standort.lagerbestand) {
             if (lager.getAnzahlKaesten()<lager.getGetraenk().getstandortmax(standort)) {
                 int anzahl = lager.getGetraenk().getstandortmax(standort)- lager.getAnzahlKaesten();
-                verschicke(standort,lager.getGetraenk().getName(),anzahl);
+                verschiebe(standort,lager.getGetraenk().getName(),anzahl);
             }
         }
     }
