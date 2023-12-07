@@ -3,14 +3,14 @@ import java.util.List;
 
 public class Standort {
     public String name;
-    public List<Lagerbestand> lagerbestand;
+    public List<Lagerbestand> lagerbestaende;
     /**
      * Konstruktor für die Klasse Standort.
      * @param name Der Name des Lagerstandorts.
      */
     public Standort(String name) {
         this.name = name;
-        this.lagerbestand = new ArrayList<>();
+        this.lagerbestaende = new ArrayList<>();
     }
 
     /**
@@ -36,7 +36,7 @@ public class Standort {
      * @return Die Liste des Lagerbestands.
      */
     public List<Lagerbestand> getLagerbestandListe() {
-        return lagerbestand;
+        return lagerbestaende;
     }
 
     /**
@@ -44,7 +44,7 @@ public class Standort {
      * @param lagerbestandListe Die zu setzende Liste des Lagerbestands.
      */
     public void setLagerbestandListe(List<Lagerbestand> lagerbestandListe) {
-        this.lagerbestand = lagerbestandListe;
+        this.lagerbestaende = lagerbestandListe;
     }
 
     /**
@@ -62,7 +62,7 @@ public class Standort {
         }
 
         Lagerbestand startLagerbestand = null;
-        for (Lagerbestand lager : lagerbestand) {
+        for (Lagerbestand lager : lagerbestaende) {
             if (lager.getGetraenk().getName().equals(getraenksorteName)) {
                 startLagerbestand = lager;
             }
@@ -102,7 +102,7 @@ public class Standort {
      */
     public void lagerbestandAusgeben() {
         System.out.println("Lagerbestände für Standort " + name + ":");
-        for (Lagerbestand lagerbestand : lagerbestand) {
+        for (Lagerbestand lagerbestand : lagerbestaende) {
             System.out.println("Getränk: " + lagerbestand.getGetraenk().getName() +
                     "; Anzahl Einzelflaschen: " + lagerbestand.getAnzahlEinzelflaschen() +
                     "; Anzahl Kästen: " + lagerbestand.getAnzahlKaesten()+

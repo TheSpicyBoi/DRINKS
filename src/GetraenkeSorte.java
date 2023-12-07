@@ -21,7 +21,8 @@ public class GetraenkeSorte {
      * @param name Der Name des Getränks.
      * @param flaschenProKasten Die Anzahl der Flaschen pro Kasten.
      * @param sollLagerbestandInKaesten Der Soll-Lagerbestand in Kästen.
-     * @param attribut Das Attribut des Getränks (z. B. Material, Gehalt usw.).
+     * @param attributName Der Name des Attributs (z. B. Material, Gehalt usw.).
+     * @param attributWert Der Wert des Attributs (z. B. Material, Gehalt usw.).
      */
     public GetraenkeSorte(String name, int flaschenProKasten, int sollLagerbestandInKaesten, String attributName, String attributWert, int zentrallagermax, int standort1max, int standort2max) {
         this.name = name;
@@ -35,9 +36,9 @@ public class GetraenkeSorte {
     }
     public int getstandortmax(Standort standort){
         switch (standort.name){
-            case "Lager1":return standort1max;
-            case "Lager2":return standort2max;
-            case "Zentrale":return zentrallagermax;
+            case "Standort1":return standort1max;
+            case "Standort2":return standort2max;
+            case "Zentrallager":return zentrallagermax;
             default:System.out.println("kein gültiger standort");
                     return 0;
         }

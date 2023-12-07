@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public abstract class KonsolenManagement {
@@ -11,24 +10,19 @@ public abstract class KonsolenManagement {
     public static void starteEingabeSchleife(){
         scanner = new Scanner(System.in);
 
-        int option = 0;
-
-        while (option != 6) {
+        while (true) {
             System.out.println("\n--- Menü ---");
             System.out.println("1. Getränke verkaufen");
             System.out.println("2. Getränke verschieben");
             System.out.println("3. Lagerbestände checken");
             System.out.println("4. Lagerbestände aus Zentrallager auffüllen");
-            System.out.println("5. Beenden");
+            System.out.println("5. Nachbestellung ins Zentrallager");
+            System.out.println("6. Beenden");
             System.out.print("Wähle eine Option: ");
 
-            boolean programmShouldClose = false;
+            boolean programmSollteSchliessen = false;
             if (scanner.hasNextInt()) {
-                option = scanner.nextInt();
-                String standortname = null;
-
-                int anzahl;
-                switch (option) {
+                switch (scanner.nextInt()) {
                     case 1:
                         optionVerkaufen();
                         break;
@@ -39,26 +33,18 @@ public abstract class KonsolenManagement {
                         optionLagerbestaendeChecken();
                         break;
                     case 4:
-                        System.out.println("Welches Lager soll nachgefüllt werden?");
-                        for (VerkaufsStandort standort :DrinksManagement.verkaufsStandorte){
-                            System.out.println(standort.getName());
-                        }
-                        standortname = scanner.next();
-                        for (VerkaufsStandort standort :DrinksManagement.verkaufsStandorte){
-                            if (standort.getName().equals(standortname)){
-                                //DrinksManagement.zentrallager.nachschicken(standort);
-                                standort.lagerbestandAuffuellen(DrinksManagement.zentrallager);
-                            }else break;
-                        }
+                        optionLagerauffuellen();
                         break;
                     case 5:
+                        optionNachbestellen();
+                        break;
+                    case 6:
                         System.out.println("Programm wird beendet.");
-                        programmShouldClose = true;
+                        programmSollteSchliessen = true;
                         break;
                     default:
                         System.out.println("Ungültige Option. Bitte wähle eine Zahl von 1 bis 6.");
                         break;
-
                 }
 
             } else {
@@ -66,7 +52,7 @@ public abstract class KonsolenManagement {
                 scanner.next();
             }
 
-            if(programmShouldClose)
+            if(programmSollteSchliessen)
                 break;
         }
 
@@ -169,4 +155,47 @@ public abstract class KonsolenManagement {
         }
     }
 
+
+    private static void optionLagerauffuellen(){
+        System.out.println("Welches Lager soll nachgefüllt werden?");
+        for (VerkaufsStandort standort : DrinksManagement.verkaufsStandorte) {
+            System.out.println(standort.getName());
+        }
+        String standortname = scanner.next();
+
+        VerkaufsStandort verkaufsStandort = null;
+        for (VerkaufsStandort standort : DrinksManagement.verkaufsStandorte){
+            if (standort.getName().equals(standortname)){
+                verkaufsStandort = standort;
+            }
+        }
+        if(verkaufsStandort == null){
+            System.out.println("Standort konnte nicht identifiziert werden");
+            return;
+        }
+        verkaufsStandort.lagerbestandAuffuellen(DrinksManagement.zentrallager);
+
+    }
+
+    private static void optionNachbestellen(){
+        System.out.println("Welches Getränk soll bestellt werden ?");
+        DrinksManagement.zentrallager.lagerbestandAusgeben();
+
+        String sortenname = scanner.next();
+
+        GetraenkeSorte getraenkeSorte = null;
+        for(GetraenkeSorte sorte : DrinksManagement.getrankeSortiment){
+            if(sortenname.equals(sorte.getName())){
+                getraenkeSorte = sorte;
+            }
+        }
+        if(getraenkeSorte == null){
+            System.out.println("Getränkesorte konnte nicht identifiziert werden");
+            return;
+        }
+        System.out.println("Wie viele Kästen sollen nachbestellt werden ?");
+        if(scanner.hasNextInt()){
+            DrinksManagement.zentrallager.nachbestellen(getraenkeSorte,scanner.nextInt());
+        }
+    }
 }

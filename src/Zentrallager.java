@@ -7,25 +7,31 @@ public class Zentrallager extends Standort{
         super(name);
     }
 
-    /**
-     * Schickt Getränke an einen bestimmten Standort nach, wenn der Bestand dort zu niedrig ist.
-     * @param standort      Der Zielstandort, an den die Getränke nachgeschickt werden.
-     */
-    public void nachschicken(Standort standort) {
-        GetraenkeSorte gesuchtesGetraenk = null;
-
-        for (Lagerbestand lager : standort.lagerbestand) {
-            if (lager.getAnzahlKaesten()<lager.getGetraenk().getstandortmax(standort)) {
-                int anzahl = lager.getGetraenk().getstandortmax(standort)- lager.getAnzahlKaesten();
-                verschiebe(standort,lager.getGetraenk().getName(),anzahl);
+    public void nachbestellen(GetraenkeSorte sorte,int anzahl){
+        Lagerbestand lagerbestand = null;
+        for (Lagerbestand lager: this.lagerbestaende){
+            if(lager.getGetraenk().getName().equals(sorte.getName())){
+                lagerbestand = lager;
+                break;
             }
         }
-    }
+        if(lagerbestand == null){
+            //wenn die sorte vorhanden ist wird die variable durch die oder-verschränkung true
+            boolean sorteVorhanden = false;
+            for (GetraenkeSorte s: DrinksManagement.getrankeSortiment){
+                sorteVorhanden =  sorteVorhanden || sorte.getName().equals(s.getName());
+            }
 
-    public void nachbestellen(){
-        for (Lagerbestand lagerbestand: this.lagerbestand){
-            lagerbestand.setAnzahlEinzelflaschen(lagerbestand.getGetraenk().getstandortmax(this)*lagerbestand.getGetraenk().getFlaschenProKasten());
-            lagerbestand.updateLagerstand();
+            if(!sorteVorhanden){
+                System.out.println("Getränkesorte konnte nicht im sortiment identifiziert werden");
+                return;
+            }
+            lagerbestand = new Lagerbestand(sorte,anzahl);
+            this.getLagerbestandListe().add(lagerbestand);
         }
+
+        lagerbestand.setAnzahlEinzelflaschen(lagerbestand.getAnzahlEinzelflaschen()+anzahl*lagerbestand.getGetraenk().getFlaschenProKasten());
+        System.out.println("Getränke erfolgreich bestellt!");
+
     }
 }

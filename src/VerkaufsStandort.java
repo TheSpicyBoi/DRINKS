@@ -12,7 +12,7 @@ public class VerkaufsStandort extends Standort {
      */
     public void getraenkeVerkaufen(String getraenksorteName, int verkauftEinzelflaschen) {
         boolean gefunden = false;
-        for (Lagerbestand lager : lagerbestand) {
+        for (Lagerbestand lager : lagerbestaende) {
             if (lager.getGetraenk().getName().equals(getraenksorteName)) {
                 int aktuelleEinzelflaschen = lager.getAnzahlEinzelflaschen();
                 if (verkauftEinzelflaschen <= aktuelleEinzelflaschen) {
@@ -29,44 +29,32 @@ public class VerkaufsStandort extends Standort {
 
         if (!gefunden) {
             System.out.println("Das gesuchte Getränk ist nicht im Lager dieses Standorts verfügbar.");
+            return;
         }
+
+        System.out.println("Getränke erfolgreich verkauft!");
     }
 
     public void lagerbestandAuffuellen(Zentrallager zentrallager){
-        for (Lagerbestand lager : lagerbestand) {
+        for (Lagerbestand lager : lagerbestaende) {
             Lagerbestand zentrallagerBestand = null;
-            for(Lagerbestand z_lager : zentrallager.lagerbestand){
+            for(Lagerbestand z_lager : zentrallager.lagerbestaende){
                 if(z_lager.getGetraenk().getName().equals(lager.getGetraenk().getName())) {
                     zentrallagerBestand = z_lager;
                     break;
                 }
             }
-            int fehlendeKaesten = lager.getGetraenk().getstandortmax(this) - lager.getAnzahlKaesten();
+            if(zentrallagerBestand == null)
+                continue;
+
+            int lagerRestFlaschen = lager.getAnzahlEinzelflaschen() % lager.getGetraenk().getFlaschenProKasten();
+            int fehlendeKaesten = lager.getGetraenk().getstandortmax(this) - lager.getAnzahlKaesten() - ((lagerRestFlaschen > 0) ? 1:0);
             //garantiert, dass nicht mehr kästen nachgefüllt werden, als da sind
             int kaesten = Math.min(zentrallagerBestand.getAnzahlKaesten(),fehlendeKaesten);
 
             //Flaschen von Zentrallager auf Standort übertragen
             lager.setAnzahlEinzelflaschen(lager.getAnzahlEinzelflaschen() + kaesten * lager.getGetraenk().getFlaschenProKasten());
             zentrallagerBestand.setAnzahlEinzelflaschen(zentrallagerBestand.getAnzahlEinzelflaschen() - kaesten * zentrallagerBestand.getGetraenk().getFlaschenProKasten());
-        }
-    }
-
-
-    /**
-     * Bestellt Getränke beim Zentrallager, wenn der Bestand unter den Sollwert fällt.
-     * @param zentrallager Das Zentrallager, bei dem die Bestellung aufgegeben wird.
-     */
-    public void nachbestellen(Zentrallager zentrallager) {
-        for (Lagerbestand lager : lagerbestand) {
-            GetraenkeSorte getraenk = lager.getGetraenk();
-            int aktuellerBestand = lager.getAnzahlEinzelflaschen();
-
-            if (aktuellerBestand < getraenk.getSollLagerbestand()) {
-                int zuBestellen = getraenk.getSollLagerbestand() - aktuellerBestand;
-                int anzahlKaestenZuBestellen = (zuBestellen + getraenk.getFlaschenProKasten() - 1) / getraenk.getFlaschenProKasten();
-
-                zentrallager.verschiebe(this, getraenk.getName(), anzahlKaestenZuBestellen);
-            }
         }
     }
 }
