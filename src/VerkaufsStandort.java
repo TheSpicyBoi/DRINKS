@@ -10,7 +10,7 @@ public class VerkaufsStandort extends Standort {
      * @param getraenksorteName Der Name der Getränksorte, die verkauft werden soll.
      * @param verkauftEinzelflaschen Die Anzahl der zu verkaufenden Einzelflaschen.
      */
-    public void sachenVerkaufen(String getraenksorteName, int verkauftEinzelflaschen) {
+    public void getraenkeVerkaufen(String getraenksorteName, int verkauftEinzelflaschen) {
         boolean gefunden = false;
         for (Lagerbestand lager : lagerbestand) {
             if (lager.getGetraenk().getName().equals(getraenksorteName)) {
@@ -29,6 +29,25 @@ public class VerkaufsStandort extends Standort {
 
         if (!gefunden) {
             System.out.println("Das gesuchte Getränk ist nicht im Lager dieses Standorts verfügbar.");
+        }
+    }
+
+    public void lagerbestandAuffuellen(Zentrallager zentrallager){
+        for (Lagerbestand lager : lagerbestand) {
+            Lagerbestand zentrallagerBestand = null;
+            for(Lagerbestand z_lager : zentrallager.lagerbestand){
+                if(z_lager.getGetraenk().getName().equals(lager.getGetraenk().getName())) {
+                    zentrallagerBestand = z_lager;
+                    break;
+                }
+            }
+            int fehlendeKaesten = lager.getGetraenk().getstandortmax(this) - lager.getAnzahlKaesten();
+            //garantiert, dass nicht mehr kästen nachgefüllt werden, als da sind
+            int kaesten = Math.min(zentrallagerBestand.getAnzahlKaesten(),fehlendeKaesten);
+
+            //Flaschen von Zentrallager auf Standort übertragen
+            lager.setAnzahlEinzelflaschen(lager.getAnzahlEinzelflaschen() + kaesten * lager.getGetraenk().getFlaschenProKasten());
+            zentrallagerBestand.setAnzahlEinzelflaschen(zentrallagerBestand.getAnzahlEinzelflaschen() - kaesten * zentrallagerBestand.getGetraenk().getFlaschenProKasten());
         }
     }
 
