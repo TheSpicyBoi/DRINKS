@@ -27,7 +27,7 @@ public class Zentrallager extends Standort{
             }
         }
 
-        if (gesuchtesGetraenk != null&&standort.name !="zentrallager") {
+        if (gesuchtesGetraenk != null && !standort.name.equals("zentrallager")) {
             Lagerbestand neuerLagerbestand = new Lagerbestand(gesuchtesGetraenk, anzahlKaesten * gesuchtesGetraenk.getFlaschenProKasten());
             for(Lagerbestand standortlager : standort.lagerbestand){
                 if (standortlager.getGetraenk().getName().equals(neuerLagerbestand.getGetraenk().getName())){
