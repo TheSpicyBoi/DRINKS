@@ -109,7 +109,7 @@ public class GetraenkeSorte {
 
     /**
      * Setzt den Attribut Wert des Getränks.
-     * @param Der Attribut Wert des Getränks.
+     * @param wert Der Wert des Getränks.
      */
     public void setAttributWert(String wert) {
        this.attributWert = wert;

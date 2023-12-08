@@ -55,6 +55,10 @@ public class Standort {
      * @param anzahlKaesten     Die Anzahl der zu verschickenden Kästen.
      */
     public void verschiebe(Standort zielStandort, String getraenksorteName, int anzahlKaesten) {
+        if(anzahlKaesten <= 0){
+            System.out.println("Ungülltige Kastenanzahl");
+            return;
+        }
 
         if(this == zielStandort){
             System.out.println("Start- und Zielstandort sind identisch!");
@@ -87,13 +91,16 @@ public class Standort {
             System.out.println("Nicht genug Kästen vorhanden");
             return;
         }
-        if(zielLagerbestand.getGetraenk().getstandortmax(zielStandort) < anzahlKaesten+zielLagerbestand.getAnzahlKaesten()) {
+
+        int restflaschen = zielLagerbestand.getAnzahlEinzelflaschen() % zielLagerbestand.getGetraenk().getstandortmax(zielStandort);
+        if(zielLagerbestand.getGetraenk().getstandortmax(zielStandort) < (anzahlKaesten+zielLagerbestand.getAnzahlKaesten() + (restflaschen>0 ? 1 : 0))) {
             System.out.println("Maximale Kapazität des Ziel Standortes überschritten");
             return;
         }
 
         zielLagerbestand.setAnzahlEinzelflaschen((zielLagerbestand.getAnzahlKaesten() + anzahlKaesten)*zielLagerbestand.getGetraenk().getFlaschenProKasten());
         startLagerbestand.setAnzahlEinzelflaschen((startLagerbestand.getAnzahlKaesten() - anzahlKaesten)*startLagerbestand.getGetraenk().getFlaschenProKasten());
+        System.out.println("Verschieben erfolgreich!");
     }
 
 

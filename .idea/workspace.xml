@@ -9,8 +9,6 @@
       <change beforePath="$PROJECT_DIR$/src/DrinksManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DrinksManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GetraenkeSorte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GetraenkeSorte.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/KonsolenManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KonsolenManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Lagerbestand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lagerbestand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Standort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Standort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VerkaufsStandort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VerkaufsStandort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Zentrallager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Zentrallager.java" afterDir="false" />
@@ -192,7 +190,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701960411571</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Zusätzliche Optionen fürs Frontend">
+      <option name="closed" value="true" />
+      <created>1701981096456</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1701981096456</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

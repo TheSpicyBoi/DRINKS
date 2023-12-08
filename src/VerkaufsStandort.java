@@ -11,6 +11,12 @@ public class VerkaufsStandort extends Standort {
      * @param verkauftEinzelflaschen Die Anzahl der zu verkaufenden Einzelflaschen.
      */
     public void getraenkeVerkaufen(String getraenksorteName, int verkauftEinzelflaschen) {
+        if(verkauftEinzelflaschen <= 0){
+            System.out.println("Ungülltige Verkaufszahl");
+            return;
+        }
+
+
         boolean gefunden = false;
         for (Lagerbestand lager : lagerbestaende) {
             if (lager.getGetraenk().getName().equals(getraenksorteName)) {
@@ -22,7 +28,7 @@ public class VerkaufsStandort extends Standort {
                 } else {
                     System.out.println("Nicht genügend Bestand für den Verkauf.");
                     gefunden = true;
-                    break;
+                    return;
                 }
             }
         }

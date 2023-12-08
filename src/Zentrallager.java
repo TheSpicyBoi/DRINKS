@@ -7,7 +7,18 @@ public class Zentrallager extends Standort{
         super(name);
     }
 
-    public void nachbestellen(GetraenkeSorte sorte,int anzahl){
+    /**
+     *
+     * @param sorte
+     * @param anzahl
+     * @return FehlerCode - Wenn dieser 0 ist, ist die Methode erfolgreich gewesen, ansonsten ist ein Fehler aufgetreten
+     */
+    public int nachbestellen(GetraenkeSorte sorte,int anzahl){
+        if(anzahl <= 0){
+            System.out.println("Ungülltige Kastenanzahl");
+            return -1;
+        }
+
         Lagerbestand lagerbestand = null;
         for (Lagerbestand lager: this.lagerbestaende){
             if(lager.getGetraenk().getName().equals(sorte.getName())){
@@ -24,14 +35,19 @@ public class Zentrallager extends Standort{
 
             if(!sorteVorhanden){
                 System.out.println("Getränkesorte konnte nicht im sortiment identifiziert werden");
-                return;
+                return -1;
             }
             lagerbestand = new Lagerbestand(sorte,anzahl);
             this.getLagerbestandListe().add(lagerbestand);
         }
 
+        if(lagerbestand.getAnzahlKaesten() + anzahl > lagerbestand.getGetraenk().getstandortmax(this)){
+            System.out.println("Maximale Kapazität des Zentrallagers überschritten");
+            return -1;
+        }
+
         lagerbestand.setAnzahlEinzelflaschen(lagerbestand.getAnzahlEinzelflaschen()+anzahl*lagerbestand.getGetraenk().getFlaschenProKasten());
-        System.out.println("Getränke erfolgreich bestellt!");
+        return 0;
 
     }
 }

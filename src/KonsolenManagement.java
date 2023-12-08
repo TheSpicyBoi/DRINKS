@@ -5,7 +5,7 @@ public abstract class KonsolenManagement {
     static Scanner scanner;
 
     /**
-     * Die Methode kann gestartet werden um die Konsolenschleife zu starten, welche wiederholt die aktionsmöglichkeiten für den Nutzer aus gibt
+     * Die Methode kann gestartet werden um die Konsolenschleife zu starten, welche wiederholt die aktionsmöglichkeiten für den Nutzer aus gibt und die Eingabe interpretiert
      */
     public static void starteEingabeSchleife(){
         scanner = new Scanner(System.in);
@@ -17,7 +17,8 @@ public abstract class KonsolenManagement {
             System.out.println("3. Lagerbestände checken");
             System.out.println("4. Lagerbestände aus Zentrallager auffüllen");
             System.out.println("5. Nachbestellung ins Zentrallager");
-            System.out.println("6. Beenden");
+            System.out.println("6. Automatische Nachbestellung");
+            System.out.println("7. Beenden");
             System.out.print("Wähle eine Option: ");
 
             boolean programmSollteSchliessen = false;
@@ -39,6 +40,9 @@ public abstract class KonsolenManagement {
                         optionNachbestellen();
                         break;
                     case 6:
+                        DrinksManagement.automatischeNachbestellung();
+                        break;
+                    case 7:
                         System.out.println("Programm wird beendet.");
                         programmSollteSchliessen = true;
                         break;
@@ -48,7 +52,7 @@ public abstract class KonsolenManagement {
                 }
 
             } else {
-                System.out.println("Bitte gebe eine Zahl ein.");
+                System.out.println("Dies ist keine Zahl");
                 scanner.next();
             }
 
@@ -82,17 +86,27 @@ public abstract class KonsolenManagement {
         String verkauftesache = scanner.next();
 
         System.out.println("Wie viele Flaschen sollen verkauft werden?");
-        int anzahl = scanner.nextInt();
+        int anzahl = 0;
+        if(scanner.hasNextInt())
+            anzahl = scanner.nextInt();
+        else{
+            //scannt den nächsten string welcher nicht als int identifiziert wurde, um ihn aus dem stream zu entfernen
+            scanner.next();
+            System.out.println("Dies ist keine Zahl");
+            return;
+        }
+
+
         standort.getraenkeVerkaufen(verkauftesache, anzahl);
 
     }
     private static void optionVerschieben(){
-        System.out.println("Von Wo soll es verschoben werden");
+        System.out.println("Von Wo soll es verschoben werden ?");
         for (Standort standort :DrinksManagement.standorte) {
             System.out.println(standort.getName());
         }
         String startStandortName = scanner.next();
-        System.out.println("Wohin soll es verschoben werden");
+        System.out.println("Wohin soll es verschoben werden ?");
         for (Standort standort :DrinksManagement.standorte){
             System.out.println(standort.getName());
         }
@@ -110,7 +124,7 @@ public abstract class KonsolenManagement {
             return;
         }
 
-        System.out.println("Welches Getränk soll verschickt werden?");
+        System.out.println("Welches Getränk soll verschickt werden ?");
         startStandort.lagerbestandAusgeben();
         String sortenname = scanner.next();
 
@@ -132,13 +146,18 @@ public abstract class KonsolenManagement {
             return;
         }
 
-        System.out.println("Wie viele Kästen sollen verschickt werden?");
+        System.out.println("Wie viele Kästen sollen verschickt werden ?");
         System.out.println(startLagerbestand.getAnzahlKaesten()+" Kästen sind im Start Standort");
         System.out.println((zielLagerbestand.getGetraenk().getstandortmax(zielStandort) - zielLagerbestand.getAnzahlKaesten())+" Kästen können noch in den Ziel Standort gelagert werden");
         int anzahl = 0;
         if(scanner.hasNextInt())
             anzahl = scanner.nextInt();
-        else return;
+        else{
+            //scannt den nächsten string welcher nicht als int identifiziert wurde, um ihn aus dem stream zu entfernen
+            scanner.next();
+            System.out.println("Dies ist keine Zahl");
+            return;
+        }
         startStandort.verschiebe(zielStandort,sortenname,anzahl);
     }
 
@@ -174,7 +193,7 @@ public abstract class KonsolenManagement {
             return;
         }
         verkaufsStandort.lagerbestandAuffuellen(DrinksManagement.zentrallager);
-
+        System.out.println("Lagerbestand auffüllen erfolgreich!");
     }
 
     private static void optionNachbestellen(){
@@ -194,8 +213,20 @@ public abstract class KonsolenManagement {
             return;
         }
         System.out.println("Wie viele Kästen sollen nachbestellt werden ?");
+
+        int ret = 0;
         if(scanner.hasNextInt()){
-            DrinksManagement.zentrallager.nachbestellen(getraenkeSorte,scanner.nextInt());
+            ret = DrinksManagement.zentrallager.nachbestellen(getraenkeSorte,scanner.nextInt());
+        }else{
+            //scannt den nächsten string welcher nicht als int identifiziert wurde, um ihn aus dem stream zu entfernen
+            scanner.next();
+            System.out.println("Dies ist keine Zahl");
+            return;
         }
+
+        if(ret == 0)
+            System.out.println("Getränke erfolgreich bestellt!");
     }
+
+
 }

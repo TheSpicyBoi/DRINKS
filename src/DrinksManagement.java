@@ -52,12 +52,33 @@ public abstract class DrinksManagement {
         }
 
         //Das Zentrallager komplett befüllen
-        for(Lagerbestand bestand : zentrallager.getLagerbestandListe()){
+        for(Lagerbestand bestand : zentrallager.getLagerbestandListe()) {
             bestand.setAnzahlEinzelflaschen(bestand.getGetraenk().getstandortmax(zentrallager) * bestand.getGetraenk().getFlaschenProKasten());
         }
+    }
 
+    public static void automatischeNachbestellung(){
+        int[] bestaende = new int[getrankeSortiment.size()];
+        for(Standort standort : standorte){
+            for(int i = 0;i < getrankeSortiment.size();i++){
+                for(Lagerbestand lagerbestand : standort.getLagerbestandListe()){
+                    if(lagerbestand.getGetraenk().getName().equals(getrankeSortiment.get(i).getName())){
+                        bestaende[i] += lagerbestand.getAnzahlKaesten();
+                    }
+                }
+            }
+        }
+        for(int i = 0;i < bestaende.length;i++){
+            bestaende[i] = getrankeSortiment.get(i).getSollLagerbestand()-bestaende[i];
 
+            if(bestaende[i] >= 0){
+                int ret = zentrallager.nachbestellen(getrankeSortiment.get(i),bestaende[i]);
+                if(ret != 0)
+                    return;
+            }
+        }
 
+        System.out.println("Nachbestellung erfolgreich");
     }
 
 }
