@@ -2,7 +2,7 @@
  * Die Klasse Lagerbestand repräsentiert den Bestand eines bestimmten Getränks in einem Lager.
  */
 public class Lagerbestand {
-    private Getraenke getraenk;
+    private GetraenkeSorte getraenk;
     private int anzahlEinzelflaschen;
     private int anzahlKaesten;
 
@@ -11,7 +11,7 @@ public class Lagerbestand {
      * @param getraenk Das Getränk, das im Lagerbestand enthalten ist.
      * @param anzahlKaesten Die Anzahl der Kaesten des Getränks im Lager.
      */
-    public Lagerbestand(Getraenke getraenk, int anzahlKaesten) {
+    public Lagerbestand(GetraenkeSorte getraenk, int anzahlKaesten) {
         this.getraenk = getraenk;
         this.anzahlEinzelflaschen = anzahlKaesten*getraenk.getFlaschenProKasten();
         updateLagerstand();
@@ -21,7 +21,7 @@ public class Lagerbestand {
      * Gibt das Getränk zurück, das im Lagerbestand enthalten ist.
      * @return Das Getränk im Lagerbestand.
      */
-    public Getraenke getGetraenk() {
+    public GetraenkeSorte getGetraenk() {
         return getraenk;
     }
 
@@ -29,7 +29,7 @@ public class Lagerbestand {
      * Setzt das Getränk im Lagerbestand.
      * @param getraenk Das zu setzende Getränk.
      */
-    public void setGetraenk(Getraenke getraenk) {
+    public void setGetraenk(GetraenkeSorte getraenk) {
         this.getraenk = getraenk;
     }
 
@@ -64,7 +64,8 @@ public class Lagerbestand {
      */
     public void updateLagerstand() {
         int flaschenProKasten = getraenk.getFlaschenProKasten();
-        int restflaschen = anzahlEinzelflaschen % flaschenProKasten;
-        anzahlKaesten = (anzahlEinzelflaschen - restflaschen) / flaschenProKasten;
+        //int restflaschen = anzahlEinzelflaschen % flaschenProKasten;
+
+        anzahlKaesten = anzahlEinzelflaschen / flaschenProKasten;
     }
 }

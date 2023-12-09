@@ -6,66 +6,48 @@ public class Zentrallager extends Standort{
     public Zentrallager(String name) {
         super(name);
     }
+
     /**
-     * Verschickt Getränke an einen bestimmten Standort.
      *
-     * @param standort          Der Zielstandort, an den die Getränke verschickt werden.
-     * @param getraenksorteName Der Name der Getränksorte, die verschickt werden sollen.
-     * @param anzahlKaesten     Die Anzahl der zu verschickenden Kästen.
+     * @param sorte
+     * @param anzahl
+     * @return FehlerCode - Wenn dieser 0 ist, ist die Methode erfolgreich gewesen, ansonsten ist ein Fehler aufgetreten
      */
-    public void verschicke(Standort standort, String getraenksorteName, int anzahlKaesten) {
-        Getraenke gesuchtesGetraenk = null;
-        boolean found = false;
+    public int nachbestellen(GetraenkeSorte sorte,int anzahl){
+        if(anzahl <= 0){
+            System.out.println("Ungülltige Kastenanzahl");
+            return -1;
+        }
 
-        for (Lagerbestand lager : lagerbestand) {
-            if (lager.getGetraenk().getName().equals(getraenksorteName)) {
-                if (lager.getAnzahlKaesten() > anzahlKaesten){
-                    gesuchtesGetraenk = lager.getGetraenk();
-                } else System.out.println("so viele kästen gibt es nicht, bitte zuerst Nachbestellen!!!");
-
+        Lagerbestand lagerbestand = null;
+        for (Lagerbestand lager: this.lagerbestaende){
+            if(lager.getGetraenk().getName().equals(sorte.getName())){
+                lagerbestand = lager;
                 break;
             }
         }
-
-        if (gesuchtesGetraenk != null&&standort.name !="zentrallager") {
-            Lagerbestand neuerLagerbestand = new Lagerbestand(gesuchtesGetraenk, anzahlKaesten * gesuchtesGetraenk.getFlaschenProKasten());
-            for(Lagerbestand standortlager : standort.lagerbestand){
-                if (standortlager.getGetraenk().getName().equals(neuerLagerbestand.getGetraenk().getName())){
-                    found =true;
-                    standortlager.setAnzahlEinzelflaschen(anzahlKaesten*standortlager.getGetraenk().getFlaschenProKasten());
-                }
+        if(lagerbestand == null){
+            //wenn die sorte vorhanden ist wird die variable durch die oder-verschränkung true
+            boolean sorteVorhanden = false;
+            for (GetraenkeSorte s: DrinksManagement.getrankeSortiment){
+                sorteVorhanden =  sorteVorhanden || sorte.getName().equals(s.getName());
             }
 
-            for (Lagerbestand lager : lagerbestand) {
-                if (lager.getGetraenk() == gesuchtesGetraenk) {
-                    lager.setAnzahlEinzelflaschen(lager.getAnzahlEinzelflaschen() + neuerLagerbestand.getAnzahlEinzelflaschen());
-                    lager.updateLagerstand();
-                    break;
-                }
+            if(!sorteVorhanden){
+                System.out.println("Getränkesorte konnte nicht im sortiment identifiziert werden");
+                return -1;
             }
-        } else System.out.println("Das gesuchte Getränk ist nicht im Zentrallager verfügbar.");
-    }
-
-    /**
-     * Schickt Getränke an einen bestimmten Standort nach, wenn der Bestand dort zu niedrig ist.
-     *
-     * @param standort      Der Zielstandort, an den die Getränke nachgeschickt werden.
-     */
-    public void nachschicken(Standort standort) {
-        Getraenke gesuchtesGetraenk = null;
-
-        for (Lagerbestand lager : standort.lagerbestand) {
-            if (lager.getAnzahlKaesten()<lager.getGetraenk().getstandortmax(standort)) {
-                int anzahl = lager.getGetraenk().getstandortmax(standort)- lager.getAnzahlKaesten();
-                verschicke(standort,lager.getGetraenk().getName(),anzahl);
-            }
+            lagerbestand = new Lagerbestand(sorte,anzahl);
+            this.getLagerbestandListe().add(lagerbestand);
         }
-    }
 
-    public void nachbestellen(){
-        for (Lagerbestand lagerbestand: this.lagerbestand){
-            lagerbestand.setAnzahlEinzelflaschen(lagerbestand.getGetraenk().getstandortmax(this)*lagerbestand.getGetraenk().getFlaschenProKasten());
-            lagerbestand.updateLagerstand();
+        if(lagerbestand.getAnzahlKaesten() + anzahl > lagerbestand.getGetraenk().getstandortmax(this)){
+            System.out.println("Maximale Kapazität des Zentrallagers überschritten");
+            return -1;
         }
+
+        lagerbestand.setAnzahlEinzelflaschen(lagerbestand.getAnzahlEinzelflaschen()+anzahl*lagerbestand.getGetraenk().getFlaschenProKasten());
+        return 0;
+
     }
 }
