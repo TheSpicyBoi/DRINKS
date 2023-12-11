@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Standort {
+public abstract class Standort {
     public String name;
     public List<Lagerbestand> lagerbestaende;
     /**

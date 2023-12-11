@@ -1,11 +1,14 @@
 import java.util.Scanner;
 
+/**
+ * Die Klasse KonsolenmManagement stellt die methoden bereit umd das gesamte Getränkelager zu steuern.
+ */
 public abstract class KonsolenManagement {
 
     static Scanner scanner;
 
     /**
-     * Die Methode kann gestartet werden um die Konsolenschleife zu starten, welche wiederholt die aktionsmöglichkeiten für den Nutzer aus gibt und die Eingabe interpretiert
+     * Die Methode kann gestartet werden um die Konsolenschleife zu starten, welche wiederholt die aktionsmöglichkeiten für den Nutzer aus gibt und die Eingabe interpretiert.
      */
     public static void starteEingabeSchleife(){
         scanner = new Scanner(System.in);
@@ -63,6 +66,10 @@ public abstract class KonsolenManagement {
         scanner.close();
     }
 
+    /**
+     *Die Methode Verkaufen entfernt einzelne Flaschen von Lagerbeständen von Standorten.
+     * Fragt den Benutzer von welchem Standort, von welcher Sorte wie viel verkauft werden soll.
+     */
     private static void optionVerkaufen(){
         System.out.println("Verkaufsaktion:");
         System.out.println("Wo soll verkauft werden?");
@@ -100,6 +107,10 @@ public abstract class KonsolenManagement {
         standort.verkaufen(verkauftesache, anzahl);
 
     }
+/**
+ * Führt die Verschiebung von Getränken zwischen verschiedenen Standorten durch.
+ * Ermöglicht dem Benutzer, Getränke von einem Startstandort zu einem Zielstandort zu verschieben.
+ */
     private static void optionVerschieben(){
         System.out.println("Von Wo soll es verschoben werden ?");
         for (Standort standort :DrinksManagement.standorte) {
@@ -161,6 +172,9 @@ public abstract class KonsolenManagement {
         startStandort.verschiebe(zielStandort,sortenname,anzahl);
     }
 
+    /**
+     * Ermöglicht den Benutzer Alle Lagerbestände von allen Standorten auszugeben.
+     */
     private static void optionLagerbestaendeChecken(){
         System.out.println("Lagerbestände:");
         for (Standort standort :DrinksManagement.standorte){
@@ -174,7 +188,9 @@ public abstract class KonsolenManagement {
         }
     }
 
-
+    /**
+     * Ermöglicht den Benutzer die Lagerbestände in den Verkaufsstandorten auf Maximal aufzufüllen.
+     */
     private static void optionLagerauffuellen(){
         System.out.println("Welches Lager soll nachgefüllt werden?");
         for (VerkaufsStandort standort : DrinksManagement.verkaufsStandorte) {
@@ -196,6 +212,9 @@ public abstract class KonsolenManagement {
         System.out.println("Lagerbestand auffüllen erfolgreich!");
     }
 
+    /**
+     * Ermöglicht es den Benutzer Lagerbestände im Zentrallager einzeln nachzubestellen.
+     */
     private static void optionNachbestellen(){
         System.out.println("Welches Getränk soll bestellt werden ?");
         DrinksManagement.zentrallager.lagerbestandAusgeben();
