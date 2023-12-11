@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="636bb6f7-cccf-4b61-ba7e-244901058025" name="Changes" comment="Automatische Nachbestellung und mehr Error checking für ungültige werte">
+    <list default="true" id="636bb6f7-cccf-4b61-ba7e-244901058025" name="Changes" comment="Option 6 fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DrinksManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DrinksManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/KonsolenManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KonsolenManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VerkaufsStandort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VerkaufsStandort.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,7 +201,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702030971288</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Option 6 fix">
+      <option name="closed" value="true" />
+      <created>1702283542804</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1702283542804</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -225,7 +231,8 @@
     <MESSAGE value="Frontend und kleine Namens Änderungen" />
     <MESSAGE value="Zusätzliche Optionen fürs Frontend" />
     <MESSAGE value="Automatische Nachbestellung und mehr Error checking für ungültige werte" />
-    <option name="LAST_COMMIT_MESSAGE" value="Automatische Nachbestellung und mehr Error checking für ungültige werte" />
+    <MESSAGE value="Option 6 fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Option 6 fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

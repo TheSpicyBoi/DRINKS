@@ -65,7 +65,7 @@ public abstract class KonsolenManagement {
 
     private static void optionVerkaufen(){
         System.out.println("Verkaufsaktion:");
-        System.out.println("Wo soll verkauft werden");
+        System.out.println("Wo soll verkauft werden?");
         for (VerkaufsStandort verkaufsStandort : DrinksManagement.verkaufsStandorte){
             System.out.println(verkaufsStandort.getName());
         }
