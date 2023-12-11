@@ -55,6 +55,7 @@ public class VerkaufsStandort extends Standort {
 
             int lagerRestFlaschen = lager.getAnzahlEinzelflaschen() % lager.getGetraenk().getFlaschenProKasten();
             int fehlendeKaesten = lager.getGetraenk().getstandortmax(this) - lager.getAnzahlKaesten() - ((lagerRestFlaschen > 0) ? 1:0);
+
             //garantiert, dass nicht mehr kästen nachgefüllt werden, als da sind
             int kaesten = Math.min(zentrallagerBestand.getAnzahlKaesten(),fehlendeKaesten);
 

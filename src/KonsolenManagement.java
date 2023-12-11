@@ -67,7 +67,7 @@ public abstract class KonsolenManagement {
     }
 
     /**
-     *Die Methode Verkaufen entfernt einzelne Flaschen von Lagerbeständen von Standorten.
+     * Die Methode Verkaufen entfernt einzelne Flaschen von Lagerbeständen von Standorten.
      * Fragt den Benutzer von welchem Standort, von welcher Sorte wie viel verkauft werden soll.
      */
     private static void optionVerkaufen(){

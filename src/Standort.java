@@ -92,8 +92,9 @@ public abstract class Standort {
             return;
         }
 
+        //Zusätzliches abchecken, ob noch restflaschen da sind. Denn wenn der bestand mit standortmax-1 Kästen befüllt ist und noch restflaschen da sind darf nicht noch ein Kasten hierher verschoben werden
         int restflaschen = zielLagerbestand.getAnzahlEinzelflaschen() % zielLagerbestand.getGetraenk().getstandortmax(zielStandort);
-        if(zielLagerbestand.getGetraenk().getstandortmax(zielStandort) < (anzahlKaesten+zielLagerbestand.getAnzahlKaesten() + (restflaschen>0 ? 1 : 0))) {
+        if(zielLagerbestand.getGetraenk().getstandortmax(zielStandort) < (anzahlKaesten+zielLagerbestand.getAnzahlKaesten() + (restflaschen > 0 ? 1 : 0))) {
             System.out.println("Maximale Kapazität des Ziel Standortes überschritten");
             return;
         }

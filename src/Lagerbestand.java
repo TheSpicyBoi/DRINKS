@@ -64,7 +64,6 @@ public class Lagerbestand {
      */
     public void updateLagerstand() {
         int flaschenProKasten = getraenk.getFlaschenProKasten();
-        //int restflaschen = anzahlEinzelflaschen % flaschenProKasten;
 
         anzahlKaesten = anzahlEinzelflaschen / flaschenProKasten;
     }

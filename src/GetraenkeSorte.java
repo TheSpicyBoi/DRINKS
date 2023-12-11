@@ -34,6 +34,12 @@ public class GetraenkeSorte {
         this.standort1max=standort1max;
         this.standort2max=standort2max;
     }
+
+    /**
+     *
+     * @param standort Ist die
+     * @return
+     */
     public int getstandortmax(Standort standort){
         switch (standort.name){
             case "Standort1":return standort1max;
@@ -115,24 +121,50 @@ public class GetraenkeSorte {
        this.attributWert = wert;
     }
 
+    /**
+     * Setzt den maximalen Bestand für Zentrallager
+     * @param zentrallagermax Der maximale Bestand für Zentrallager
+     */
     public void setZentrallagermax(int zentrallagermax){
         this.zentrallagermax = zentrallagermax;
     }
 
+    /**
+     * Gibt den maximalen Bestand für Zentrallager zurück
+     * @return Der maximale Bestand für Zentrallager
+     */
     public int getZentrallagermax(){
         return zentrallagermax;
     }
 
+    /**
+     * Setzt den maximalen Bestand für Standort 1
+     * @param standort1max Der maximale Bestand für Standort 1
+     */
     public void setStandort1max(int standort1max){
         this.standort1max = standort1max;
     }
 
+    /**
+     * Gibt den maximalen Bestand für Standort 1 zurück
+     * @return Der maximale Bestand für Standort 1
+     */
     public int getStandort1max(){
         return standort1max;
     }
+
+    /**
+     * Setzt den maximalen Bestand für Standort 2
+     * @param standort2max Der maximale Bestand für Standort 2
+     */
     public void setStandort2max(int standort2max){
         this.standort2max =standort2max;
     }
+
+    /**
+     * Gibt den maximalen Bestand für Standort 2 zurück
+     * @return Der maximale Bestand für Standort 2
+     */
     public int getStandort2max() {
         return standort2max;
     }

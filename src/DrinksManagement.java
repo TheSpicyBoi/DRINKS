@@ -58,14 +58,13 @@ public abstract class DrinksManagement {
     }
 
     /**
-     * Führt automatische Nachbestellungen für Getränke durch, um den Soll-Lagerbestand zu erreichen.
-     * Geht alle Standorte durch, sammelt die Lagerbestände für jedes Getränk und bestellt bei Bedarf nach.
+     * Es ist die Methode, welche über alle Standort iteriert und automatische eine Nachbestellung auslöst, falls es unter den soll wert fällt
      */
     public static void automatischeNachbestellung(){
+        //aufsummieren der Getränke Bestände von allen Standorten
         int[] bestaende = new int[getrankeSortiment.size()];
-
         for(Standort standort : standorte){
-            for(int i = 0; i < getrankeSortiment.size(); i++){
+            for(int i = 0;i < getrankeSortiment.size();i++){
                 for(Lagerbestand lagerbestand : standort.getLagerbestandListe()){
                     if(lagerbestand.getGetraenk().getName().equals(getrankeSortiment.get(i).getName())){
                         bestaende[i] += lagerbestand.getAnzahlKaesten();
@@ -73,6 +72,7 @@ public abstract class DrinksManagement {
                 }
             }
         }
+        //Wenn der bestand unter dem soll wert ist wird jeweils eine nachbestellung ausgelöst
         for(int i = 0;i < bestaende.length;i++){
             bestaende[i] = getrankeSortiment.get(i).getSollLagerbestand()-bestaende[i];
 
