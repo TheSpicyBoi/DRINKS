@@ -10,7 +10,7 @@ public class VerkaufsStandort extends Standort {
      * @param getraenksorteName Der Name der Getränksorte, die verkauft werden soll.
      * @param verkauftEinzelflaschen Die Anzahl der zu verkaufenden Einzelflaschen.
      */
-    public void getraenkeVerkaufen(String getraenksorteName, int verkauftEinzelflaschen) {
+    public void verkaufen(String getraenksorteName, int verkauftEinzelflaschen) {
         if(verkauftEinzelflaschen <= 0){
             System.out.println("Ungülltige Verkaufszahl");
             return;

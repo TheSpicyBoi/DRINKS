@@ -97,7 +97,7 @@ public abstract class KonsolenManagement {
         }
 
 
-        standort.getraenkeVerkaufen(verkauftesache, anzahl);
+        standort.verkaufen(verkauftesache, anzahl);
 
     }
     private static void optionVerschieben(){

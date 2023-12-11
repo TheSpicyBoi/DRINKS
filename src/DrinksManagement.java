@@ -71,7 +71,7 @@ public abstract class DrinksManagement {
         for(int i = 0;i < bestaende.length;i++){
             bestaende[i] = getrankeSortiment.get(i).getSollLagerbestand()-bestaende[i];
 
-            if(bestaende[i] >= 0){
+            if(bestaende[i] > 0){
                 int ret = zentrallager.nachbestellen(getrankeSortiment.get(i),bestaende[i]);
                 if(ret != 0)
                     return;

@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="636bb6f7-cccf-4b61-ba7e-244901058025" name="Changes" comment="Zusätzliche Optionen fürs Frontend">
+    <list default="true" id="636bb6f7-cccf-4b61-ba7e-244901058025" name="Changes" comment="Automatische Nachbestellung und mehr Error checking für ungültige werte">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DrinksManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DrinksManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GetraenkeSorte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GetraenkeSorte.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/KonsolenManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/KonsolenManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Standort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Standort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/VerkaufsStandort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VerkaufsStandort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Zentrallager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Zentrallager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +195,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701981096456</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Automatische Nachbestellung und mehr Error checking für ungültige werte">
+      <option name="closed" value="true" />
+      <created>1702030971288</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1702030971288</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -219,7 +224,8 @@
     <MESSAGE value="Kleine Änderungen" />
     <MESSAGE value="Frontend und kleine Namens Änderungen" />
     <MESSAGE value="Zusätzliche Optionen fürs Frontend" />
-    <option name="LAST_COMMIT_MESSAGE" value="Zusätzliche Optionen fürs Frontend" />
+    <MESSAGE value="Automatische Nachbestellung und mehr Error checking für ungültige werte" />
+    <option name="LAST_COMMIT_MESSAGE" value="Automatische Nachbestellung und mehr Error checking für ungültige werte" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
